@@ -1,0 +1,718 @@
+/* ================================
+   GLOBAL SETTINGS
+================================ */
+
+:root {
+    --background: #100b24;
+    --background-light: #1b1235;
+    --pink: #f4a9d5;
+    --pink-light: #ffd5ec;
+    --purple: #bba2ff;
+    --white: #fff8ff;
+    --muted: #c6bad8;
+    --glass: rgba(255, 255, 255, 0.055);
+    --border: rgba(255, 255, 255, 0.13);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background: var(--background);
+    color: var(--white);
+    font-family: "DM Sans", sans-serif;
+    overflow: hidden;
+}
+
+button {
+    font: inherit;
+}
+
+/* ================================
+   BACKGROUND AND STARS
+================================ */
+
+.night-sky {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+    background:
+        radial-gradient(ellipse at 50% 0%, #30204f 0%, transparent 55%),
+        linear-gradient(145deg, #100b24, #17102e 55%, #0c1027);
+}
+
+.stars {
+    position: absolute;
+    inset: 0;
+    opacity: 0.75;
+    background-image:
+        radial-gradient(1px 1px at 10% 20%, white 99%, transparent),
+        radial-gradient(2px 2px at 30% 70%, white 99%, transparent),
+        radial-gradient(1px 1px at 70% 25%, white 99%, transparent),
+        radial-gradient(2px 2px at 85% 65%, white 99%, transparent),
+        radial-gradient(1px 1px at 50% 45%, white 99%, transparent),
+        radial-gradient(1px 1px at 15% 85%, white 99%, transparent),
+        radial-gradient(2px 2px at 92% 12%, white 99%, transparent),
+        radial-gradient(1px 1px at 43% 12%, white 99%, transparent),
+        radial-gradient(1px 1px at 62% 88%, white 99%, transparent),
+        radial-gradient(2px 2px at 5% 52%, white 99%, transparent);
+    background-size: 100% 100%;
+    animation: twinkle 5s ease-in-out infinite alternate;
+}
+
+.moon {
+    position: absolute;
+    width: 125px;
+    height: 125px;
+    top: 7%;
+    right: 12%;
+    border-radius: 50%;
+    background: #fff0d9;
+    box-shadow:
+        0 0 35px rgba(255, 224, 195, 0.25),
+        0 0 90px rgba(255, 224, 195, 0.12);
+    opacity: 0.75;
+}
+
+.moon::after {
+    content: "";
+    position: absolute;
+    width: 115px;
+    height: 115px;
+    top: -10px;
+    left: 22px;
+    border-radius: 50%;
+    background: #211638;
+}
+
+.glow {
+    position: absolute;
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.18;
+}
+
+.glow-one {
+    background: #a34fba;
+    top: 40%;
+    left: -200px;
+}
+
+.glow-two {
+    background: #6d65c9;
+    bottom: -200px;
+    right: -100px;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.4; }
+    to { opacity: 0.95; }
+}
+
+/* ================================
+   JOURNEY / SCREENS
+================================ */
+
+.journey {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.screen {
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 35px 22px 95px;
+    opacity: 0;
+}
+
+.screen.active {
+    display: flex;
+    animation: screenEnter 0.65s ease forwards;
+}
+
+@keyframes screenEnter {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ================================
+   TYPOGRAPHY
+================================ */
+
+h1,
+h2 {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 500;
+    line-height: 1.12;
+}
+
+h1 {
+    font-size: clamp(3rem, 8vw, 5.6rem);
+}
+
+h1 span,
+h2 span {
+    color: var(--pink);
+    font-family: "Great Vibes", cursive;
+    font-weight: 400;
+}
+
+h2 {
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.eyebrow,
+.small-label {
+    color: var(--purple);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.eyebrow {
+    margin-bottom: 14px;
+    text-align: center;
+}
+
+.small-label {
+    margin-bottom: 28px;
+}
+
+.section-symbol {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--pink);
+    margin-bottom: 16px;
+}
+
+/* ================================
+   WELCOME SCREEN
+================================ */
+
+.welcome-content,
+.ending-content {
+    width: min(100%, 750px);
+    text-align: center;
+    margin: auto;
+}
+
+.moon-icon {
+    font-size: 4rem;
+    color: #ffe7c5;
+    margin-bottom: 18px;
+    text-shadow: 0 0 30px rgba(255, 226, 193, 0.4);
+}
+
+.welcome-content h1 {
+    margin-bottom: 18px;
+}
+
+.welcome-description {
+    max-width: 430px;
+    margin: 0 auto;
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.9;
+}
+
+.decorative-line {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 13px;
+    margin: 30px auto;
+}
+
+.decorative-line span:not(.tiny-star) {
+    width: 55px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--pink));
+}
+
+.decorative-line span:last-child {
+    transform: rotate(180deg);
+}
+
+.tiny-star {
+    color: var(--pink);
+}
+
+.bottom-note {
+    margin-top: 25px;
+    color: #a99abf;
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+}
+
+/* ================================
+   CONTENT CARDS
+================================ */
+
+.content-card,
+.music-card {
+    width: min(100%, 760px);
+    max-height: 100%;
+    overflow-y: auto;
+    padding: 38px clamp(22px, 5vw, 55px);
+    border: 1px solid var(--border);
+    border-radius: 25px;
+    background: var(--glass);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.2);
+    scrollbar-width: thin;
+    scrollbar-color: rgba(244, 169, 213, 0.5) transparent;
+}
+
+.content-card::-webkit-scrollbar {
+    width: 5px;
+}
+
+.content-card::-webkit-scrollbar-thumb {
+    background: rgba(244, 169, 213, 0.5);
+    border-radius: 10px;
+}
+
+.message-text {
+    color: #e4dbea;
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(1.12rem, 2vw, 1.3rem);
+    line-height: 1.8;
+}
+
+.message-text p {
+    margin-bottom: 19px;
+}
+
+.highlighted-message {
+    color: var(--pink-light);
+    font-weight: 600;
+}
+
+.highlighted-message span {
+    color: var(--pink);
+    font-style: italic;
+}
+
+.dedication-text,
+.letter-text {
+    padding-top: 5px;
+}
+
+.letter-card {
+    width: min(100%, 820px);
+}
+
+.signature {
+    color: var(--pink);
+    font-family: "Great Vibes", cursive;
+    font-size: 2rem;
+    text-align: right;
+    padding-top: 10px;
+}
+
+/* ================================
+   MUSIC PLAYER
+================================ */
+
+.music-card {
+    width: min(100%, 550px);
+    text-align: center;
+    overflow-y: auto;
+}
+
+.song-subtitle {
+    color: var(--muted);
+    margin-top: -10px;
+    margin-bottom: 25px;
+    font-size: 0.9rem;
+}
+
+.album-art {
+    position: relative;
+    width: min(100%, 310px);
+    aspect-ratio: 1;
+    margin: 0 auto 25px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 50% 35%, rgba(255, 210, 229, 0.3), transparent 35%),
+        linear-gradient(145deg, #6b4b89, #30204e 55%, #17152f);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.3);
+}
+
+.album-art::before,
+.album-art::after {
+    content: "";
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: 50%;
+}
+
+.album-art::after {
+    width: 270px;
+    height: 270px;
+}
+
+.album-moon {
+    color: #ffe9d4;
+    font-size: 4rem;
+    text-shadow: 0 0 35px rgba(255, 225, 190, 0.65);
+    margin-bottom: 20px;
+}
+
+.album-stars {
+    color: #ffe0ef;
+    margin-bottom: 18px;
+}
+
+.album-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.65rem;
+    color: white;
+}
+
+.album-dedication {
+    margin-top: 8px;
+    color: #f7cce5;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+}
+
+.visualizer {
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin: 15px 0;
+}
+
+.visualizer span {
+    width: 3px;
+    height: 6px;
+    border-radius: 5px;
+    background: var(--pink);
+}
+
+.visualizer.playing span {
+    animation: equalize 0.7s ease-in-out infinite alternate;
+}
+
+.visualizer.playing span:nth-child(3n) {
+    animation-delay: 0.2s;
+}
+
+.visualizer.playing span:nth-child(2n) {
+    animation-delay: 0.4s;
+}
+
+@keyframes equalize {
+    from { height: 5px; }
+    to { height: 27px; }
+}
+
+.player-message {
+    color: var(--pink-light);
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.2rem;
+    margin: 10px 0 20px;
+}
+
+.audio-controls {
+    width: 100%;
+    max-width: 390px;
+    margin: auto;
+}
+
+.time-row {
+    display: flex;
+    justify-content: space-between;
+    color: #c8bbd8;
+    font-size: 0.75rem;
+    margin-bottom: 8px;
+}
+
+.progress-bar {
+    width: 100%;
+    accent-color: var(--pink);
+    cursor: pointer;
+}
+
+.player-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 27px;
+    margin: 22px 0;
+}
+
+.icon-button,
+.play-button {
+    border: none;
+    cursor: pointer;
+    color: white;
+    transition: 0.2s ease;
+}
+
+.icon-button {
+    background: transparent;
+    font-size: 1.7rem;
+}
+
+.play-button {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f2a6d1, #b99aff);
+    color: #21132e;
+    font-size: 1.25rem;
+    box-shadow: 0 0 25px rgba(235, 151, 204, 0.25);
+}
+
+.icon-button:hover,
+.play-button:hover {
+    transform: scale(1.1);
+}
+
+.player-caption {
+    color: #b9abc9;
+    font-size: 0.75rem;
+    line-height: 1.6;
+    margin-top: 10px;
+}
+
+/* ================================
+   NAVIGATION
+================================ */
+
+.navigation {
+    position: absolute;
+    bottom: 22px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(12px, 4vw, 35px);
+    padding: 0 15px;
+}
+
+.primary-button,
+.secondary-button {
+    border-radius: 50px;
+    padding: 13px 24px;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.primary-button {
+    color: #24152f;
+    border: none;
+    background: linear-gradient(110deg, #f5b1d7, #c7aaff);
+    box-shadow: 0 5px 25px rgba(216, 151, 207, 0.17);
+}
+
+.secondary-button {
+    color: var(--white);
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.primary-button:hover,
+.secondary-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(216, 151, 207, 0.2);
+}
+
+.progress {
+    color: #c8bbd8;
+    font-size: 0.78rem;
+    letter-spacing: 2px;
+    white-space: nowrap;
+}
+
+.progress i {
+    color: var(--pink);
+    font-style: normal;
+    padding: 0 3px;
+}
+
+/* ================================
+   ENDING SCREEN
+================================ */
+
+.ending-heart {
+    color: var(--pink);
+    font-size: 5rem;
+    margin-bottom: 20px;
+    animation: heartbeat 2s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.12); }
+}
+
+.ending-content h2 {
+    font-size: clamp(2.7rem, 7vw, 4.5rem);
+}
+
+.ending-content h2 span {
+    display: block;
+    margin-top: 8px;
+}
+
+.ending-message {
+    max-width: 470px;
+    margin: 0 auto;
+    color: var(--muted);
+    line-height: 1.9;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.35rem;
+}
+
+.final-love {
+    color: var(--pink-light);
+    font-family: "Great Vibes", cursive;
+    font-size: 2.2rem;
+    margin-top: 22px;
+}
+
+.ending-stars {
+    margin-top: 35px;
+    color: var(--pink);
+    letter-spacing: 7px;
+}
+
+.ending-navigation {
+    position: relative;
+    margin-top: 35px;
+    bottom: auto;
+}
+
+/* ================================
+   MOBILE RESPONSIVENESS
+================================ */
+
+@media (max-width: 600px) {
+    .screen {
+        padding: 22px 15px 90px;
+    }
+
+    .moon {
+        width: 85px;
+        height: 85px;
+        right: 8%;
+        top: 5%;
+    }
+
+    .moon::after {
+        width: 80px;
+        height: 80px;
+        left: 17px;
+        top: -8px;
+    }
+
+    .content-card,
+    .music-card {
+        padding: 28px 21px;
+        border-radius: 19px;
+    }
+
+    .message-text {
+        font-size: 1.12rem;
+        line-height: 1.72;
+    }
+
+    .navigation {
+        bottom: 14px;
+        gap: 10px;
+    }
+
+    .primary-button,
+    .secondary-button {
+        padding: 12px 17px;
+        font-size: 0.76rem;
+    }
+
+    .progress {
+        font-size: 0.68rem;
+        letter-spacing: 1px;
+    }
+
+    .album-art {
+        width: min(100%, 250px);
+    }
+
+    .ending-navigation {
+        margin-top: 25px;
+    }
+}
+
+@media (max-height: 700px) {
+    .screen {
+        padding-top: 15px;
+        padding-bottom: 85px;
+    }
+
+    .content-card,
+    .music-card {
+        padding-top: 23px;
+        padding-bottom: 23px;
+    }
+
+    .album-art {
+        width: min(100%, 210px);
+    }
+
+    .moon-icon {
+        font-size: 3rem;
+        margin-bottom: 10px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}
